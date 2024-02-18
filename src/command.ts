@@ -9,6 +9,7 @@ command.register('slapper', 'Crate Slappers!', CommandPermissionLevel.Operator).
     let player = origin.getEntity() as Player
     const actors = param.actor.newResults(origin)
     actors.forEach(actor => {
+        if (actor?.isPlayer()) return;
         Slapper.create(actor, param.command, param?.message).then(() => {
             send.success(`Created slapper: ${actor.getIdentifier()}`, player)
         }).catch(() => {
